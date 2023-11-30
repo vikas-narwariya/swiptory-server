@@ -31,8 +31,7 @@ app.use((req, res, next) => {
 
 // app.use(cors());
 const whitelist = [
-  // "https://swip-tory-pied.vercel.app",
-  // "https://swip-tory-ankitamalik22.vercel.app",
+  "https://swiptory.web.app/",
   "http://localhost:5000",
   "http://localhost:3000",
 ];
