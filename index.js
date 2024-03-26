@@ -20,36 +20,36 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.header("Access-Control-Allow-Credentials", "true");
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   res.header("Access-Control-Allow-Credentials", "true");
 
-  next();
-});
+//   next();
+// });
 
 // app.use(cors());
-const whitelist = [
-  "https://swiptory.web.app/",
-  "http://localhost:5000",
-  "http://localhost:3000",
-];
-const corsOptions = {
-  credentials: true,
-  origin: (origin, callback) => {
-    if (whitelist.includes(origin)) return callback(null, true);
+// const whitelist = [
+//   "https://swiptory.web.app/",
+//   "http://localhost:5000",
+//   "http://localhost:3000",
+// ];
+// const corsOptions = {
+//   credentials: true,
+//   origin: (origin, callback) => {
+//     if (whitelist.includes(origin)) return callback(null, true);
 
-    callback(new Error("Not allowed by CORS"));
-  },
-};
+//     callback(new Error("Not allowed by CORS"));
+//   },
+// };
 
 // app.use(cors());
 // const corsOptions = {
 //   credentials: true,
 //   origin: "*",
 // };
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(cookieParser());
 
@@ -67,6 +67,9 @@ connectDB();
 // routes
 app.use("/api/user", userRoutes);
 app.use("/api/story", storyRoutes);
+app.use("/api/health", (req, res) => {
+  res.send("it is working fine");
+});
 
 // app.get("/", async (req, res) => {
 //   res.status(200).json("Server is up and running");
